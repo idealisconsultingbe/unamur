@@ -10,7 +10,7 @@
     'author': 'Idealis Consulting',
     'website': 'http://www.idealisconsulting.com',
     'category': 'website',
-    'depends': ['account', 'base', 'website', 'hr_expense', 'sale_expense', 'portal', 'sale'],
+    'depends': ['account', 'base', 'website', 'hr_expense', 'sale_expense', 'portal', 'purchase', 'sale'],
 
     'data': [
         # Data
