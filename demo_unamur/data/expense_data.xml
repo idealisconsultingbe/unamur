@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_expense.model_hr_expense" model="ir.model">
+            <field name="website_form_key">create_expense</field>
+            <field name="website_form_default_field_id" ref="hr_expense.field_hr_expense__description"/>
+            <field name="website_form_access">True</field>
+            <field name="website_form_label">Create a Expense</field>
+        </record>
+        <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>hr.expense</value>
+            <value eval="[
+                'name','date','product_id','employee_id'
+            ]"/>
+        </function>
+    </data>
+</odoo>
