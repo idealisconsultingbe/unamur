@@ -15,8 +15,11 @@
     'data': [
         # Data
         'data/expense_data.xml',
+        # Security
+        'security/ir.model.access.csv',
         # Views
         'views/expense_templates.xml',
+        'views/unamur_cpo_views.xml',
 
     ],
     'demo': [],
