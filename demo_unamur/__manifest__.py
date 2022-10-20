@@ -10,7 +10,8 @@
     'author': 'Idealis Consulting',
     'website': 'http://www.idealisconsulting.com',
     'category': 'website',
-    'depends': ['account', 'base', 'website', 'hr_expense', 'sale_expense', 'portal', 'purchase', 'sale'],
+    'depends': ['account', 'account_budget', 'base', 'website', 'hr_expense', 'sale_expense', 'portal', 'purchase',
+                'purchase_requisition', 'sale'],
 
     'data': [
         # Data
@@ -21,6 +22,7 @@
         'views/expense_templates.xml',
         'views/unamur_cpo_views.xml',
         'views/account_move_line_views.xml',
+        'views/budget_views.xml',
 
     ],
     'demo': [],

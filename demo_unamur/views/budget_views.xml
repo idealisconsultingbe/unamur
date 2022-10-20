@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="budget_form_view" model="ir.ui.view">
+        <field name="name">budget.view.form</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <div class="mb24">
+                    <field name="budget_type" widget="radio" options="{'horizontal': true}"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']"
+                   position="after">
+                <field name="cpo"/>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']"
+                   position="after">
+                <field name="purchase_order_id"/>
+                <field name="amount_total"/>
+                <field name="purchase_requisition_id" invisible="1"/>
+                <field name="requisition_amount_total"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_requisition_form_view" model="ir.ui.view">
+        <field name="name">purchase.requisition.view.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_get_attachment_view"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        type="object">
+                    <field name="attachment_number" widget="statinfo" string="Documents"
+                           options="{'reload_on_button': true}"/>
+                </button>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <widget name="attach_document" string="Joindre un contrat" action="message_post"
+                        attrs="{'invisible': ['|', ('attachment_number', '&lt;', 1), ('id','=',False)]}"/>
+                <widget name="attach_document" string="Joindre un contrat" action="message_post" highlight="1"
+                        attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_description_variants']"
+                   position="after">
+                <field name="cpo"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
