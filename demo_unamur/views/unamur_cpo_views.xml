@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- VIEWS -->
+    <record id="cpo_view_tree" model="ir.ui.view">
+        <field name="name">cpo.view.tree</field>
+        <field name="model">unamur.cpo</field>
+        <field name="arch" type="xml">
+            <tree string="CPO">
+                <field name="name"/>
+                <field name="partner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cpo_view_form" model="ir.ui.view">
+        <field name="name">unamur.cpo.view.form</field>
+        <field name="model">unamur.cpo</field>
+        <field name="arch" type="xml">
+            <form string="Add Returns">
+                <sheet>
+                    <div class="o_row">
+                        <label for="cpo_first_number" string="Code"/>
+                        <div class="col-3">
+                            <field name="cpo_first_number" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                        </div>
+                        <div class="col-2">
+                            <field name="cpo_second_number"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group name="main">
+                            <field name="partner_id"/>
+                            <field name="is_readonly" invisible="1"/>
+                            <field name="description"/>
+                        </group>
+                        <group name="second">
+                            <field name="group_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="cpo_action" model="ir.actions.act_window">
+        <field name="name">CPO</field>
+        <field name="res_model">unamur.cpo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="cpo_menu" parent="account.menu_analytic_accounting" action="cpo_action"/>
+</odoo>
