@@ -16,9 +16,7 @@
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']"
                    position="after">
-                <field name="purchase_order_id"/>
                 <field name="amount_total"/>
-                <field name="purchase_requisition_id" invisible="1"/>
                 <field name="requisition_amount_total"/>
             </xpath>
         </field>
@@ -44,12 +42,24 @@
                 <widget name="attach_document" string="Joindre un contrat" action="message_post" highlight="1"
                         attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
             </xpath>
-
-            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_description_variants']"
-                   position="after">
+            <xpath expr="//field[@name='vendor_id']" position="after">
+                <field name="cpo"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_description_variants']" position="after">
                 <field name="cpo"/>
             </xpath>
         </field>
     </record>
+    <record id="purchase_order_form_view" model="ir.ui.view">
+        <field name="name">purchase.order.view.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='requisition_id']" position="after">
+                <field name="cpo"/>
+            </xpath>
+        </field>
+    </record>
+
 
 </odoo>

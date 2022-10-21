@@ -12,6 +12,13 @@ class UnamurCpo(models.Model):
     is_readonly = fields.Boolean(string="is_readonly")
     create_date = fields.Datetime(string='Créé le', default=fields.Date.today())
     description = fields.Text(string='Description')
+    allowed_user_ids = fields.Many2many(
+        comodel_name="res.users",
+        relation="account_analytic_res_user_rel",
+        column1="account_analytic_id",
+        column2="user_id",
+        string="Allowed Users",
+    )
 
     @api.model
     def _get_computed_name(self, cpo_first_number, cpo_second_number):
