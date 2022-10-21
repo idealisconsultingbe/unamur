@@ -15,16 +15,16 @@ class CrossoveredBudgetLines(models.Model):
 
     cpo = fields.Many2one('unamur.cpo', string='CPO')
     amount_total = fields.Monetary(string='Engagé', compute="_compute_amount")
-    requisition_amount_total = fields.Monetary(string="Contrat d'engagement")
+    requisition_amount_total = fields.Monetary(string="Contrat d'engagement", compute="_compute_amount")
 
     @api.depends("cpo")
     def _compute_amount(self):
         for budget in self:
-            budget.amount_total = sum(self.env["purchase.order"].search([("cpo", "=", budget.cpo.id)]).mapped(
-                "amount_total")) if budget.cpo else 0.0
+            budget.amount_total = sum(self.env["purchase.order.line"].search([("cpo", "=", budget.cpo.id)]).mapped(
+                "price_unit")) if budget.cpo else 0.0
             budget.requisition_amount_total = sum(
-                (self.env["purchase.requisition"].search([("cpo", "=", budget.cpo.id)]).mapped(
-                    "line_ids")).mapped("price_unit")) if budget.cpo else 0.0
+                self.env["purchase.requisition.line"].search([("cpo", "=", budget.cpo.id)]).mapped(
+                    "price_unit")) if budget.cpo else 0.0
 
 
 class PurchaseRequisitionLine(models.Model):
@@ -36,17 +36,7 @@ class PurchaseRequisitionLine(models.Model):
 class PurchaseRequisition(models.Model):
     _inherit = "purchase.requisition"
 
-    cpo = fields.Many2one('unamur.cpo', string="CPO", compute="_compute_cpo")
     attachment_number = fields.Integer('Documents', compute='_compute_attachment_number')
-
-    @api.depends("line_ids")
-    def _compute_cpo(self):
-        """
-        Return the first Analytic Account found in order_line
-        """
-        for purchase in self:
-            cpo = purchase.line_ids.mapped("cpo")
-            purchase.cpo = cpo if len(cpo) == 1 else False
 
     def _compute_attachment_number(self):
         attachment_data = self.env['ir.attachment'].read_group(

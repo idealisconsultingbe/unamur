@@ -10,8 +10,8 @@
                     <field name="budget_type" widget="radio" options="{'horizontal': true}"/>
                 </div>
             </xpath>
-            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']"
-                   position="after">
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='general_budget_id']"
+                   position="before">
                 <field name="cpo"/>
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']"
@@ -42,10 +42,7 @@
                 <widget name="attach_document" string="Joindre un contrat" action="message_post" highlight="1"
                         attrs="{'invisible': ['|',('attachment_number', '&gt;=', 1), ('id','=',False)]}"/>
             </xpath>
-            <xpath expr="//field[@name='vendor_id']" position="after">
-                <field name="cpo"/>
-            </xpath>
-            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_description_variants']" position="after">
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_description_variants']" position="before">
                 <field name="cpo"/>
             </xpath>
         </field>
@@ -55,7 +52,7 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='requisition_id']" position="after">
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="after">
                 <field name="cpo"/>
             </xpath>
         </field>
