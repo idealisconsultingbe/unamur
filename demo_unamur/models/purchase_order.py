@@ -7,6 +7,12 @@ class PurchaseOrderLine(models.Model):
     cpo = fields.Many2one('unamur.cpo', string='CPO')
 
 
+class HrExpense(models.Model):
+    _inherit = "hr.expense"
+
+    cpo = fields.Many2one('unamur.cpo', string='CPO')
+
+
 class Users(models.Model):
     _inherit = "res.users"
 

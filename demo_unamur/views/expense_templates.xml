@@ -271,7 +271,7 @@
                                             <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required"
                                                  data-type="char" data-name="Field">
                                                 <div class="row s_col_no_resize s_col_no_bgcolor"
-                                                     style="margin-left: 10px;">
+                                                     style="margin-left: 10px;margin-right: 10px;">
                                                     <label class="col-form-label col-sm-auto s_website_form_label"
                                                            style="width: 200px" for="expense1">
                                                         <span class="s_website_form_label_content">Description</span>
@@ -286,16 +286,16 @@
                                             </div>
                                             <div class="form-group col-12 s_website_form_field" data-name="Field">
                                                 <div class="row s_col_no_resize s_col_no_bgcolor"
-                                                     style="margin-left: 10px;">
+                                                     style="margin-left: 10px;margin-right: 10px;">
                                                     <label class="col-form-label col-sm-auto s_website_form_label"
                                                            style="width: 200px" for="expense2">
-                                                        <span class="s_website_form_label_content">Product</span>
+                                                        <span class="s_website_form_label_content">Produit</span>
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
                                                         <select name="product_id" id="expense2"
                                                                 class="form-control">
-                                                            <option value="">product...</option>
+                                                            <option value="">Type...</option>
                                                             <t t-foreach="products or []" t-as="product">
                                                                 <option t-att-value="product.id"
                                                                         t-att-data-zip="product.name">
@@ -306,13 +306,35 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group col-12 s_website_form_field" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor"
+                                                     style="margin-left: 10px;margin-right: 10px;">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="expense5">
+                                                        <span class="s_website_form_label_content">CPO</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select name="cpo" id="expense5"
+                                                                class="form-control">
+                                                            <option value="">CPO...</option>
+                                                            <t t-foreach="cpos or []" t-as="cpo">
+                                                                <option t-att-value="cpo.id"
+                                                                        t-att-data-zip="cpo.name">
+                                                                    <t t-esc="cpo.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group col-12 s_website_form_field" data-type="char"
                                                  data-name="Field">
                                                 <div class="row s_col_no_resize s_col_no_bgcolor"
-                                                     style="margin-left: 10px;">
+                                                     style="margin-left: 10px;margin-right: 10px;">
                                                     <label class="col-form-label col-sm-auto s_website_form_label"
                                                            style="width: 200px" for="expense3">
-                                                        <span class="s_website_form_label_content">Amount paid</span>
+                                                        <span class="s_website_form_label_content">Montant payé</span>
                                                     </label>
                                                     <div class="col-sm">
                                                         <input id="expense3" type="text"
@@ -324,10 +346,10 @@
                                             <div class="form-group col-12 s_website_form_field" data-type="char"
                                                  data-name="Field">
                                                 <div class="row s_col_no_resize s_col_no_bgcolor"
-                                                     style="margin-left: 10px;">
+                                                     style="margin-left: 10px;margin-right: 10px;">
                                                     <label class="col-form-label col-sm-auto s_website_form_label"
                                                            style="width: 200px" for="expense4">
-                                                        <span class="s_website_form_label_content">Amount due</span>
+                                                        <span class="s_website_form_label_content">Montant dû</span>
                                                     </label>
                                                     <div class="col-sm">
                                                         <input id="expense4" type="text"
@@ -336,13 +358,41 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group col-12 s_website_form_field" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor"
+                                                     style="margin-left: 10px;margin-right: 10px;" >
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="payment_mode">
+                                                        Payé par
+                                                    </label>
+                                                    <div class="col-lg-8 col-md-3">
+                                                        <div class="form-check o_radio_item">
+                                                            <input name="payment_mode" type="radio"
+                                                                   class="form-check-input o_radio_input"
+                                                                   value="own_account" id="payment_mode"
+                                                                   checked="true"/>
+                                                            <label class="form-check-label col-form-label label-optional"
+                                                                   for="payment_mode">Employé (à rembourser)
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check o_radio_item">
+                                                            <input name="payment_mode" type="radio"
+                                                                   class="form-check-input o_radio_input"
+                                                                   value="company_account" id="payment_mode"/>
+                                                            <label class="form-check-label col-form-label label-optional"
+                                                                   for="payment_mode">Société
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group col-12 s_website_form_field" data-type="char"
                                                  data-name="Field">
                                                 <div class="row s_col_no_resize s_col_no_bgcolor"
-                                                     style="margin-left: 10px;">
+                                                     style="margin-left: 10px;margin-right: 10px;">
                                                     <label class="col-form-label col-sm-auto s_website_form_label"
                                                            style="width: 200px" for="expense4">
-                                                        <span class="s_website_form_label_content">Receipt</span>
+                                                        <span class="s_website_form_label_content">Joindre</span>
                                                     </label>
                                                     <div class="col-sm">
                                                         <input type="file" class="o_input_file form-control"
@@ -356,7 +406,7 @@
                                                 <div style="width: 200px;" class="s_website_form_label"/>
                                                 <a href="#" role="button"
                                                    class="btn btn-primary btn-lg s_website_form_send">
-                                                    Submit
+                                                    ENVOYER
                                                 </a>
                                                 <span id="s_website_form_result"></span>
                                             </div>

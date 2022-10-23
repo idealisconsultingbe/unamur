@@ -26,10 +26,12 @@ class PortalExpense(WebsiteForm):
     def u_namur_expense_form(self, **post):
         values = {}
         products = request.env["product.product"].sudo().search([("can_be_expensed", "=", True)])
+        cpos = request.env["unamur.cpo"].sudo().search([])
         values.update(
             {
                 "page_name": "my_expense_form",
                 "products": products,
+                "cpos": cpos,
                 "employee": request.env.user.employee_id,
             }
         )
