@@ -10,4 +10,8 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    cpo = fields.Many2one('unamur.cpo', string='CPO')
+    cpo = fields.Many2one('unamur.cpo', copy=False, string='CPO')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        return super(AccountMoveLine, self).create(vals_list)

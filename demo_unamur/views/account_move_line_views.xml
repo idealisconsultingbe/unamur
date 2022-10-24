@@ -8,6 +8,9 @@
             <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='product_id']" position="after">
                 <field name="cpo"/>
             </xpath>
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']" position="after">
+                <field name="cpo"/>
+            </xpath>
         </field>
     </record>
 
@@ -18,7 +21,7 @@
         <field name="view_id" ref="account.view_out_invoice_tree"/>
         <field name="search_view_id" ref="account.view_account_invoice_filter"/>
         <field name="domain">[('journal_code','=','CRE')]</field>
-        <field name="context">{'default_move_type': 'out_invoice'}</field>
+        <field name="context">{'default_move_type': 'out_invoice', 'default_journal_id' : 10}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a customer invoice
