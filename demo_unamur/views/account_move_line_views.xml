@@ -35,14 +35,35 @@
     <menuitem id="customer_creance" name="Déclaration de créance" parent="account.menu_finance_receivables"
               action="action_creance_invoice_type" sequence="1"/>
 
+    <template id="cre_report_invoice_document" inherit_id="account.report_invoice_document" primary="True">
+        <xpath expr="//div[hasclass('page')]//h2" position="replace">
+            <h2>
+                <span>Déclaration de créance</span>
+                <br></br>
+                <span t-if="o.name != '/'" t-field="o.name"/>
+            </h2>
+        </xpath>
+
+    </template>
+
+    <template id="demo_report_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="demo_unamur.cre_report_invoice_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+
     <record id="account_invoices_declaration" model="ir.actions.report">
         <field name="name">Déclaration de créance</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">account.report_invoice</field>
-        <field name="report_file">account.report_invoice</field>
+        <field name="report_name">demo_unamur.demo_report_invoice</field>
+        <field name="report_file">demo_unamur.demo_report_invoice</field>
         <field name="print_report_name">(object._get_report_base_filename())</field>
-        <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+        <field name="attachment">(object.state == 'posted') and ((object.name or 'CRE').replace('/','_')+'.pdf')</field>
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="binding_type">report</field>
     </record>
